@@ -1,0 +1,98 @@
+<div class="company" *ngIf="(company$ | async) as company">
+  <div class="container company-header">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1>{{ company.title }}</h1>
+        <div>
+          {{ company.acronym }} | {{ company.sector?.title }} | {{ company.country?.title }}
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div>
+          <span>{{ 'COMPANY.DETAIL.LASTPRICE' | translate }}</span>
+          <span class="big-size">{{ company.currency }}</span>
+          <span class="big-size" [innerHTML]="company.lastprice | number : '1.2-2' | marketNegative"></span>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="medium-size" [innerHTML]="company.exchange | number : '1.2-2' | marketNegative"></div>
+            <div>{{ 'COMPANY.DETAIL.EXCHANGE' | translate }}</div>
+          </div>
+          <div class="col">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+          <div class="col">
+            <div class="medium-size" [innerHTML]="(company.officialclose / 100) | percent : '1.2-2' | marketNegative"></div>
+            <div>{{ 'COMPANY.DETAIL.OFFICIALCLOSE' | translate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <button class="btn btn-primary">
+          <i class="fa fa-briefcase" aria-hidden="true"></i> {{ 'COMPANY.DETAIL.ADDTOPORTFOLIO' | translate }}
+        </button>
+        <button class="btn btn-secondary"
+                (click)="addToWatchList(company)"
+                [disabled]="disableAddWatchList">
+          <i class="fa fa-star-o" aria-hidden="true"></i> {{ 'COMPANY.DETAIL.ADDTOWATCHLIST' | translate }}
+        </button>
+      </div>
+      <div class="col-lg-4">
+        <div>{{ company.updated | date : 'dd.MM.yyyy HH:mm' }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="separator"></div>
+  <div class="container company-body">
+    <div class="row">
+      <main class="col-lg-8">
+        <div class="company-chart">
+          <app-company-chart></app-company-chart>
+        </div>
+        <div class="company-values">
+          <div class="row">
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.ONEDAY' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="(company.oneday / 100) | percent : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.ONEYEARLOW' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.oneyearlow | number : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.EPS' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.eps | number : '1.2-2' | marketNegative"></div>
+          </div>
+          <div class="row">
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.ONEWEEK' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="(company.oneweek / 100) | percent : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.ONEYEARHIGH' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.oneyearhigh | number : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.PE' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.pe | number : '1.2-2' | marketNegative"></div>
+          </div>
+          <div class="row">
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.ONEMONTH' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="(company.onemonth / 100) | percent : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.CAPITAL' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.capital | number : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.PB' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.pb | number : '1.2-2' | marketNegative"></div>
+          </div>
+          <div class="row">
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.ONEYEAR' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="(company.oneyear / 100) | percent : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.DIVIDEND' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.oneyear | number : '1.2-2' | marketNegative"></div>
+            <div class="col comp-label">{{ 'COMPANY.DETAIL.EVEBITDA' | translate }}</div>
+            <div class="col comp-value" [innerHTML]="company.evebitda | number : '1.2-2' | marketNegative"></div>
+          </div>
+        </div>
+        <p class="company-description">{{ company.description }}</p>
+      </main>
+      <aside class="col-lg-4">
+        <div class="company-comparator">
+          <h2>{{ 'COMPANY.DETAIL.COMPARATOR' | translate }}</h2>
+          <app-company-compare [companyID]="company.id"></app-company-compare>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

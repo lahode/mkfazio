@@ -1,0 +1,31 @@
+<div *ngIf="(companies$ | async) as companies">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">{{ 'COMPANY.LIST.NAME' | translate }}</th>
+        <th scope="col">{{ 'COMPANY.LIST.ACRONYM' | translate }}</th>
+        <th scope="col">{{ 'COMPANY.LIST.SECTOR' | translate }}</th>
+        <th scope="col">{{ 'COMPANY.LIST.COUNTRY' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let company of companies?.items">
+        <td><a [routerLink]="['/companies/view/' + company.id]">{{ company.title }}</a></td>
+        <td>{{ company.acronym }}</td>
+        <td>{{ company.sector?.title }}</td>
+        <td>{{ company.country?.title }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination [totalItems]="companies.count"
+              [(ngModel)]="companies.offset"
+              [maxSize]="companies.limit"
+              [boundaryLinks]="true"
+              previousText="&lsaquo;"
+              nextText="&rsaquo;"
+              firstText="&laquo;"
+              lastText="&raquo;"
+              (pageChanged)="changeResult($event)"></pagination>
+
+</div>

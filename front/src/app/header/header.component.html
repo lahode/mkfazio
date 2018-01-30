@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['/home']">{{ 'APPLICATION.BRAND' | translate }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ 'HEADER.MENU.MARKETS' | translate }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <app-market-list></app-market-list>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/companies']">{{ 'HEADER.MENU.COMPANIES' | translate }}</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/competitions']">{{ 'HEADER.MENU.COMPETITIONS' | translate }}</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ 'HEADER.MENU.LANGUAGE' | translate }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a *ngFor="let lang of translate.getLangs()" class="dropdown-item" (click)="setLanguage(lang)">{{ lang }}</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <app-watchlist-menu></app-watchlist-menu>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/profile/dashboard']">{{ 'HEADER.MENU.DASHBOARD' | translate }}</a>
+        </div>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="{{ 'HEADER.MENU.SEARCH' | translate }}" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ 'HEADER.MENU.SEARCH' | translate }}</button>
+    </form>
+  </div>
+</nav>

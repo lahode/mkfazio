@@ -1,0 +1,31 @@
+<div class="market" *ngIf="(market$ | async) as market">
+  <div class="container market-header">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>{{ market.title }}</h1>
+        <div>
+          {{ market.acronym }} | {{ market.location }} | {{ market.country?.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator"></div>
+  <div class="container market-body">
+    <div class="row">
+      <main class="col-lg-8">
+        <h2>{{ 'MARKET.DETAIL.DESCRIPTION' | translate }}</h2>
+        <p class="market-description">{{ market.description }}</p>
+      </main>
+      <aside class="col-lg-4">
+        <div class="company-comparator">
+          <h2>{{ 'MARKET.DETAIL.BEST' | translate }}</h2>
+          <app-market-ranking [marketID]="market.id" marketType="best"></app-market-ranking>
+        </div>
+        <div class="company-comparator">
+          <h2>{{ 'MARKET.DETAIL.WORSE' | translate }}</h2>
+          <app-market-ranking [marketID]="market.id" marketType="worse"></app-market-ranking>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

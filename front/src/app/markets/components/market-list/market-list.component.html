@@ -1,0 +1,1 @@
+<a *ngFor="let market of (markets$ | async)?.items" class="dropdown-item" [routerLink]="['/markets/view/' + market.id]">{{ market.title }}</a>

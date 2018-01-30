@@ -1,0 +1,25 @@
+<div class="market-ranking" [ngClass]="marketType">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" (click)="select('oneday')" [ngClass]="{active: isActive('oneday')}">{{ 'COMPANY.DETAIL.ONEDAY' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="select('oneweek')" [ngClass]="{active: isActive('oneweek')}">{{ 'COMPANY.DETAIL.ONEWEEK' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="select('onemonth')" [ngClass]="{active: isActive('onemonth')}">{{ 'COMPANY.DETAIL.ONEMONTH' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="select('oneyear')" [ngClass]="{active: isActive('oneyear')}">{{ 'COMPANY.DETAIL.ONEYEAR' | translate }}</a>
+    </li>
+  </ul>
+  <table class="table" *ngIf="(companies$ | async) as companies">
+    <tbody>
+      <tr *ngFor="let company of companies;let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ company.title }}</td>
+        <td [innerHTML]="(company.data / 100) | percent : '1.2-2' | marketNegative"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

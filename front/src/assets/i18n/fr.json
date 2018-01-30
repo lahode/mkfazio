@@ -1,0 +1,67 @@
+{
+  "APPLICATION" : {
+    "BRAND" : "The market player",
+    "ERROR" : {
+      "TITLE" : "Erreur",
+      "OK" : "Ok"
+    },
+    "CONFIRM" : {
+      "CANCEL" : "Annuler",
+      "OK" : "Confirmer"
+    }
+  },
+  "HEADER" : {
+    "MENU" : {
+      "MARKETS" : "Marchés",
+      "COMPETITIONS" : "Compétitions",
+      "COMPANIES" : "Compagnies",
+      "LANGUAGE" : "Langue",
+      "LOGOUT" : "Se déconnecter",
+      "SEARCH" : "Recherche",
+      "MANAGEWATCHLIST" : "Gérer la liste de suivi",
+      "DASHBOARD" : "Tableau de bord"
+    }
+  },
+  "COMPANY" : {
+    "LIST" : {
+      "NAME" : "Nom",
+      "ACRONYM" : "Acronyme",
+      "SECTOR" : "Secteur",
+      "COUNTRY" : "Pays"
+    },
+    "DETAIL" : {
+      "ONEDAY" : "1D",
+      "ONEWEEK" : "1W",
+      "ONEMONTH" : "1M",
+      "ONEYEAR" : "1Y",
+      "ONEYEARLOW" : "52W Low",
+      "ONEYEARHIGH" : "52W High",
+      "CAPITAL" : "Capital",
+      "DIVIDEND" : "Div. Yield",
+      "EPS" : "EPS",
+      "PE" : "P/E",
+      "PB" : "P/B",
+      "EVEBITDA" : "EV/EBITDA",
+      "LASTPRICE" : "Dernier prix",
+      "EXCHANGE" : "Change",
+      "COMPARATOR" : "Comparateur",
+      "OFFICIALCLOSE" : "Fermeture officielle",
+      "ADDTOPORTFOLIO" : "Ajouter au portfolio",
+      "ADDTOWATCHLIST" : "Ajouter à la watchlist"
+    }
+  },
+  "MARKET" : {
+    "DETAIL" : {
+      "DESCRIPTION" : "Description",
+      "COMPOSITION" : "Composition",
+      "BEST" : "Meilleurs",
+      "WORSE" : "Pires"
+    }
+  },
+  "WATCHLIST" : {
+    "MENU" : {
+      "COMPARE" : "Comparer"
+    }
+  }
+
+}

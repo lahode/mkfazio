@@ -1,0 +1,11 @@
+<div *ngIf="(watchlist$ | async) as watchlist">
+  <ul class="list-group">
+    <li class="list-group-item" *ngIf="watchlist.length > 1">
+      <a class="dropdown-item" [routerLink]="['/watchlist/compare']">{{ 'WATCHLIST.MENU.COMPARE' | translate }}</a>
+    </li>
+    <li class="list-group-item" *ngFor="let watcher of watchlist">
+      <a class="dropdown-item" [routerLink]="['/companies/view/' + watcher.company?.id]">{{ watcher.company?.title }}</a>
+      <i (click)="removeFromWatchList(watcher.id)"class="fa fa-trash-o" aria-hidden="true"></i>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,21 @@
+<div *ngIf="(watchlist$ | async) as watchlist">
+  <h2>{{ 'WATCHLIST.COMPARE.TITLE' | translate }}</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">{{ 'COMPANY.DETAIL.TITLE' | translate }}</th>
+        <th scope="col">{{ 'COMPANY.DETAIL.ONEDAY' | translate }}</th>
+        <th scope="col">{{ 'COMPANY.DETAIL.ONEWEEK' | translate }}</th>
+        <th scope="col">{{ 'COMPANY.DETAIL.ONEMONTH' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody [dragula]='"watchlistBag"' [dragulaModel]='watchlist'>
+      <tr *ngFor="let watcher of watchlist" [attr.data-id]="watcher.id">
+        <td>{{ watcher.company?.title }}</td>
+        <td>{{ watcher.company?.oneday }}</td>
+        <td>{{ watcher.company?.oneweek }}</td>
+        <td>{{ watcher.company?.onemonth }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

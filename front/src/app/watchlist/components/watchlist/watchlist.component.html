@@ -1,0 +1,21 @@
+<div *ngIf="(watchlist$ | async) as watchlist">
+  <h2>Watchlist</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Company</th>
+        <th scope="col">1D</th>
+        <th scope="col">1W</th>
+        <th scope="col">1M</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let watcher of watchlist">
+        <td>{{ watcher.company?.title }}</td>
+        <td>{{ watcher.company?.oneday }}</td>
+        <td>{{ watcher.company?.oneweek }}</td>
+        <td>{{ watcher.company?.onemonth }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
