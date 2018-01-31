@@ -25,7 +25,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     // Load the company from it's ID
     this.route.params.subscribe(params => {
       this.store.dispatch(<Action>CompanyActions.load(params.id));
-      this.store.dispatch(<Action>CompanyActions.connect(params.id));
+      this.store.dispatch(<Action>CompanyActions.refresh(params.id));
       this.companyID = params.id;
     });
 

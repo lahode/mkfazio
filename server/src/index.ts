@@ -7,6 +7,7 @@ import * as path from 'path';
 import * as morgan from 'morgan';
 import * as fs from 'fs-extra';
 import * as socketIo from 'socket.io';
+import * as fetch from 'node-fetch';
 
 import { APIRoutes }  from "./modules/routes/api.route";
 import { log }  from "./modules/log";
@@ -130,16 +131,35 @@ export class Server {
 
   // Initialize socket.io
   initSocket() {
-    // Connection
+    const REFRESH_TIME = 10 * 1000;
     this.io.sockets.on('connect', (socket: any) => {
-      console.log('Connected client on port %s.', this.port);
+      console.log('[SOCKET] Client connected');
 
-      // Send random numbers by interval
-      socket.emit('connected', socket.clientID);
+      socket.on('companyRefresh', function(companyID) {
+        console.log('Refresh company', companyID);
+        setInterval(() => {
+          const url = `https://tmp-d8-medev.c9users.io/api/company/${companyID}`;
+          fetch(url)
+            .then(response => {
+              response.json().then(company => {
+                console.log(`[SOCKET] Refresh company ${company.title} to socket ID ${socket.id}.`);
+                socket.emit('companyRefreshSuccess', company);
+              })
+              .catch(error => {
+                console.log(`[SOCKET] Company ${companyID} on error.`);
+                socket.emit('companyRefreshFailed', 'Erreur');
+              });
+            })
+            .catch(error => {
+              console.log(`[SOCKET] Company ${companyID} on error.`);
+              socket.emit('companyRefreshFailed', 'Erreur');
+            });
+        }, REFRESH_TIME);
+      });
 
       // Disconnection
       socket.on('disconnect', () => {
-        console.log('Client disconnected');
+        console.log('[SOCKET] Client disconnected');
       });
     });
   }

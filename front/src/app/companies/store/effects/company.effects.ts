@@ -44,15 +44,18 @@ export class CompanyEffects {
         .catch((res: any) => Observable.of({ type: CompanyActions.COMPANY_LOAD_FAILED, payload: res }))
       );
 
-  // Listen for the 'COMPANY_CONNECT' action
+  // Listen for the 'COMPANY_REFRESH' action
   @Effect() companyConnectAction$ = this.action$
-    .ofType(CompanyActions.COMPANY_CONNECT)
+    .ofType(CompanyActions.COMPANY_REFRESH)
     .map<Action, any>(toPayload)
-    .switchMap((payload: string) => this._company.connect(payload)
+    .switchMap((payload: string) => this._company.refresh(payload)
       // If successful, dispatch COMPANYLIST_LOAD_SUCCESS
-      .map<Action, any>((_result: any) => <Action>{ type: CompanyActions.COMPANY_LOAD_SUCCESS, payload: _result })
-        // On errors dispatch COMPANY_LOAD_SUCCESS action with result
-      .catch((res: any) => Observable.of({ type: CompanyActions.COMPANY_LOAD_SUCCESS, payload: res }))
+      .map<Action, any>((_result: any) => {
+        console.log('RESULT IN EFFECT', _result);
+        return <Action>{ type: CompanyActions.COMPANY_LOAD_SUCCESS, payload: _result };
+      })
+        // On errors dispatch COMPANY_LOAD_FAILED action with result
+      .catch((res: any) => Observable.of({ type: CompanyActions.COMPANY_LOAD_FAILED, payload: res }))
     );
 
     constructor(

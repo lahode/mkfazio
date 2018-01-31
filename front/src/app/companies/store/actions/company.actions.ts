@@ -17,7 +17,7 @@ export const CompanyActions = {
 
   COMPANY_NEW : 'COMPANY_NEW',
 
-  COMPANY_CONNECT : 'COMPANY_CONNECT',
+  COMPANY_REFRESH : 'COMPANY_REFRESH',
 
   COMPANY_LOAD_START : 'COMPANY_LOAD_START',
   COMPANY_LOAD_SUCCESS : 'COMPANY_LOAD_SUCCESS',
@@ -57,9 +57,9 @@ export const CompanyActions = {
     };
   },
 
-  connect(_credentials) {
+  refresh(_credentials) {
     return <Action>{
-      type: CompanyActions.COMPANY_CONNECT,
+      type: CompanyActions.COMPANY_REFRESH,
       payload: _credentials
     };
   }

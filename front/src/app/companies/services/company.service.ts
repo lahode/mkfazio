@@ -40,15 +40,24 @@ export class CompanyService {
       .catch(err => Observable.throw(this._manageError(err)));
   }
 
-  // Get automatic company detail updates by ID
-  public connect(id: string): Observable<any> {
+  // Refresh automatically company detail by ID
+  public refresh(id: string): Observable<any> {
     const baseURL = environment.socket.baseUrl;
-    this.socket = socketIo(baseURL, environment.socket.config);
-    return Observable.of(this.socket.on('connected', () => {
-      return this.http.get(`${baseURL}/api/get-updated-company/${id}`)
-        .map(() => this.socket.on('companyUpdate', data => Observable.of(data)))
-        .catch(err => Observable.throw(this._manageError(err)));
-    }));
+    const observable = new Observable(observer => {
+      this.socket = socketIo(baseURL, environment.socket.config);
+      this.socket
+        .emit('companyRefresh', id)
+        .on('companyRefreshSuccess', (company) => {
+          observer.next(company);
+        })
+        .on('companyRefreshFailed', (err) => {
+          console.log('Erreur recue', err);
+          this.socket.disconnect();
+          observer.error(err);
+          observer.complete();
+        });
+    });
+    return observable;
   }
 
   // Manage back-end error
