@@ -19,6 +19,7 @@ export class CompanyListComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(<Action>CompanyActions.list());
+    this.store.dispatch(<Action>CompanyActions.connect('xxx'));
     this.companies$ = this.store.select(state => state.companies);
   }
 

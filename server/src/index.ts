@@ -132,14 +132,14 @@ export class Server {
   initSocket() {
     // Connection
     this.io.sockets.on('connect', (socket: any) => {
-      console.log('Connected client on port %s.', this.port);
+      console.log('[SOCKET] Connected client on port %s.', this.port);
 
       // Send random numbers by interval
       socket.emit('connected', socket.clientID);
 
       // Disconnection
       socket.on('disconnect', () => {
-        console.log('Client disconnected');
+        console.log('[SOCKET]  Client disconnected');
       });
     });
   }
